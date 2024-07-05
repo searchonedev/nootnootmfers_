@@ -44,14 +44,11 @@
             z-index: 1000;
         }
         
-        .nav-toggle {
-            display: none;
-        }
-        
         nav ul {
             display: flex;
             justify-content: center;
             list-style-type: none;
+            flex-wrap: wrap;
         }
         
         nav ul li {
@@ -210,37 +207,13 @@
                 font-size: 16px;
             }
             
-            .nav-toggle {
-                display: block;
-                font-size: 1.5rem;
-                cursor: pointer;
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-            }
-            
             nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--text-color);
-            }
-            
-            nav ul.show {
-                display: flex;
+                flex-direction: row;
+                justify-content: center;
             }
             
             nav ul li {
-                margin: 0;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                display: block;
-                padding: 0.5rem 0;
+                margin: 0.5rem;
             }
             
             .hero {
@@ -289,7 +262,6 @@
 <body>
     <header>
         <nav class="container">
-            <div class="nav-toggle">☰</div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -378,11 +350,6 @@
                     images.eq(currentIndex).addClass('active');
                 }
             }
-
-            // Hamburger menu
-            $('.nav-toggle').click(function() {
-                $('nav ul').toggleClass('show');
-            });
 
             // Smooth scrolling
             $('a[href^="#"]').on('click', function(event) {
