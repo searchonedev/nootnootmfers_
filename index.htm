@@ -44,6 +44,10 @@
             z-index: 1000;
         }
         
+        .nav-toggle {
+            display: none;
+        }
+        
         nav ul {
             display: flex;
             justify-content: center;
@@ -127,7 +131,7 @@
         
         .carousel img {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
             position: absolute;
             opacity: 0;
@@ -180,7 +184,86 @@
             transform: translateY(-2px);
         }
         
-        @media (min-width: 768px) {
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            transition: background-color 0.3s;
+        }
+        
+        #back-to-top:hover {
+            background-color: #e69500;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            .nav-toggle {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--text-color);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 0.5rem 0;
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 4rem 0 2rem;
+            }
+            
+            .hero-image {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (min-width: 769px) {
             .hero {
                 flex-direction: row;
                 text-align: left;
@@ -206,6 +289,7 @@
 <body>
     <header>
         <nav class="container">
+            <div class="nav-toggle">☰</div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -225,14 +309,9 @@
         </section>
 
         <div class="carousel container">
-			
             <img src="nmfers (1).png" alt="NOOT•NOOT•MFERS Community Event" class="active">
-			<img src="nootafrok2.jpg" alt="NOOT•NOOT•MFERS Team">
+            <img src="nootafrok2.jpg" alt="NOOT•NOOT•MFERS Team">
             <img src="nmfers (2).png" alt="NOOT•NOOT•MFERS Token Design">
-            <img src="nmfers (1).jpg" alt="NOOT•NOOT•MFERS Team">
-			<img src="hesnoot.png" alt="NOOT•NOOT•MFERS Team">
-			<img src="nootsecondbest.png" alt="NOOT•NOOT•MFERS Team">
-			<img src="noot1.png" alt="NOOT•NOOT•MFERS Team">
         </div>
 
         <section id="about" class="content-section container">
@@ -244,12 +323,12 @@
         <section id="buy" class="content-section container">
             <h2>How to Buy NOOT•NOOT•MFERS</h2>
             <ol>
-                <li>Visit the <a href="https://magiceden.io/runes/NOOT%E2%80%A2NOOT%E2%80%A2MFERS" target="_blank">NOOT•NOOT•MFERS page on MagicEden</a></li>
-                <li>Connect your Bitcoin wallet (make sure it's Runes-compatible)</li>
-                <li>Enter the amount of NOOT•NOOT•MFERS you want to buy (remember, more NOOTs = more fun!)</li>
-                <li>Confirm the transaction in your wallet</li>
-                <li>Wait for the Bitcoin network to confirm your transaction (use this time to practice your NOOT call)</li>
-                <li>Congratulations! You're now officially part of the NOOT•NOOT•MFERS!</li>
+                <li><strong>Visit the <a href="https://magiceden.io/runes/NOOT%E2%80%A2NOOT%E2%80%A2MFERS" target="_blank">NOOT•NOOT•MFERS page on MagicEden</a></strong></li>
+                <li><strong>Connect your Bitcoin wallet</strong> (make sure it's Runes-compatible)</li>
+                <li><strong>Enter the amount of NOOT•NOOT•MFERS you want to buy</strong> (remember, more NOOTs = more fun!)</li>
+                <li><strong>Confirm the transaction in your wallet</strong></li>
+                <li><strong>Wait for the Bitcoin network to confirm your transaction</strong> (use this time to practice your NOOT call)</li>
+                <li><strong>Congratulations! You're now officially part of the NOOT•NOOT•MFERS!</strong></li>
             </ol>
         </section>
 
@@ -259,8 +338,11 @@
         </div>
     </main>
 
+    <div id="back-to-top">↑</div>
+
     <script>
         $(document).ready(function() {
+            // Carousel
             let currentIndex = 0;
             const images = $('.carousel img');
             const imageCount = images.length;
@@ -272,6 +354,60 @@
             }
 
             setInterval(nextImage, 5000); // Change image every 5 seconds
+
+            // Touch events for carousel
+            let touchstartX = 0;
+            let touchendX = 0;
+
+            $('.carousel').on('touchstart', function(event) {
+                touchstartX = event.originalEvent.touches[0].clientX;
+            });
+
+            $('.carousel').on('touchend', function(event) {
+                touchendX = event.originalEvent.changedTouches[0].clientX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchendX < touchstartX) {
+                    nextImage();
+                }
+                if (touchendX > touchstartX) {
+                    images.eq(currentIndex).removeClass('active');
+                    currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+                    images.eq(currentIndex).addClass('active');
+                }
+            }
+
+            // Hamburger menu
+            $('.nav-toggle').click(function() {
+                $('nav ul').toggleClass('show');
+            });
+
+            // Smooth scrolling
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if( target.length ) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+
+            // Back to top button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+
+            $('#back-to-top').click(function() {
+                $('html, body').animate({scrollTop : 0},800);
+                return false;
+            });
         });
     </script>
 </body>
