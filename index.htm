@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lo-Fi Vibes</title>
+    <title>NOOT•NOOT•MFERS - Memecoins on Bitcoin</title>
+    <meta name="description" content="Experience the fusion of meme art and lofi beats with NOOT•NOOT•MFERS. Listen to chill music and explore unique NFTs on the Solana blockchain.">
+    <meta name="keywords" content="NOOT NOOT MFERS, memecoin, lofi, crypto art, NFT, bitcoin, runes, ordinals, nootnoot, pingu, magiceden">
+    <meta name="author" content="0_x">
+    <meta property="og:title" content="NOOT•NOOT•MFERS - Memecoin on Bitcoin">
+    <meta property="og:description" content="Experience the fusion of meme art and lofi beats with NOOT•NOOT•MFERS. Listen to chill music and explore unique NFTs on the Solana blockchain.">
+    <meta property="og:image" content="https://example.com/noot-noot-mfers-og-image.jpg">
+    <meta property="og:url" content="https://example.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://example.com">
     <style>
         body, html {
             margin: 0;
@@ -48,32 +57,33 @@
         }
         .player-container {
             background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
+            padding: 5px;
         }
         .player {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
+            justify-content: center;
+            max-width: 600px;
             margin: 0 auto;
         }
         #audioPlayer {
-            flex-grow: 1;
-            margin: 0 20px;
+            width: 50%;
+            max-width: 300px;
         }
         #playlist {
             list-style-type: none;
             padding: 0;
-            margin: 0;
+            margin: 5px 0 0;
             display: flex;
+            justify-content: center;
         }
         #playlist li {
             cursor: pointer;
-            padding: 5px 10px;
-            margin-right: 10px;
+            padding: 3px 6px;
+            margin-right: 5px;
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            font-size: 0.8em;
+            border-radius: 10px;
+            font-size: 0.7em;
         }
         #playlist li:hover {
             background-color: rgba(255, 255, 255, 0.2);
@@ -112,6 +122,28 @@
             background-color: #45a049;
             transform: scale(1.05);
         }
+        .social-buttons {
+            margin-top: 20px;
+        }
+        .social-button {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #1DA1F2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .social-button:hover {
+            background-color: #0d95e8;
+        }
+        .social-button.telegram {
+            background-color: #0088cc;
+        }
+        .social-button.telegram:hover {
+            background-color: #0077b3;
+        }
         footer {
             text-align: center;
             font-size: 0.8em;
@@ -126,22 +158,26 @@
     <div class="content">
         <div class="player-container">
             <div class="player">
-                <audio id="audioPlayer" controls>
+                <audio id="audioPlayer" controls autoplay>
                     Your browser does not support the audio element.
                 </audio>
-                <ul id="playlist">
-                    <li data-src="lofi noot2.mp3" data-bg="nnmfers.gif">Song 1</li>
-                    <li data-src="lofi noot1.mp3" data-bg="rickmorty.gif">Song 2</li>
-                    <li data-src="lofi noot3.mp3" data-bg="sunset.gif">Song 3</li>
-                    <li data-src="lofi noot4.mp3" data-bg="bg4.jpg">Song 4</li>
-                </ul>
             </div>
+            <ul id="playlist">
+                <li data-src="lofi noot1.mp3" data-bg="pingu-jazz.gif">Song 1</li>
+                <li data-src="lofi noot2.mp3" data-bg="pingu-music.gif">Song 2</li>
+                <li data-src="lofi noot3.mp3" data-bg="nnmfers.gif">Song 3</li>
+                <li data-src="lofi noot4.mp3" data-bg="rickmorty.gif">Song 4</li>
+            </ul>
         </div>
         <div class="main-content">
             <h1>NOOT•NOOT•MFERS</h1>
             <a href="https://magiceden.io/runes/NOOT%E2%80%A2NOOT%E2%80%A2MFERS" target="_blank" class="cta-button">
                 Buy on MagicEden
             </a>
+            <div class="social-buttons">
+                <a href="https://x.com/nootnootmfers" target="_blank" class="social-button">X.com</a>
+                <a href="https://t.co/FCWdL7IVWN" target="_blank" class="social-button telegram">Telegram</a>
+            </div>
         </div>
         <footer>
             <p>© 2024 Noot Noot Mfers / 0_x. Stay noot and vibe on.</p>
